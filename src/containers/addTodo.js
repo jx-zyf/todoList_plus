@@ -41,7 +41,7 @@ class AddTodo extends Component{
                 type: 'DEL_ALL'
             });
             message.success('delete all success');
-            localStorage.clear();
+            localStorage.remove('todos');
         }else{
             message.error('nothing can be deleted!');
         }
