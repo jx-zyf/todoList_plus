@@ -1,0 +1,72 @@
+.todos{
+    overflow: auto;
+    max-height: 80vh;
+    background-color: rgba(0,0,0,.1);
+    /* border:1px solid transparent;
+    border-radius: 1vw; */
+    padding:0 1.2vw;
+}
+.todo{
+    border:1px solid gray;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin:1rem 0;
+    background-color:rgba(0,0,0,.2);
+    position: relative;
+}
+.todo>div{
+    padding:1.5rem 0;
+    width:80%;
+    font-size: 0.9rem;
+    color:#fff;
+    line-height: 1.5rem;
+    letter-spacing: 0.1rem;
+    position: relative;
+}
+.todo>div>i{
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+}
+.todo>div>p{
+    margin-left: 30px;
+}
+i{
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+.complete>i{
+    background-image: url('../static/images/complete.png');
+}
+.complete>p{
+    text-decoration: line-through;
+}
+.time{
+    color:#fff;
+    font-size: 0.8rem;
+    position: absolute;
+    top:5px;
+    right:13%;
+}
+.del{
+    display: block;
+    width:36px;
+    height:36px;
+    cursor: pointer;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('../static/images/delete.png');
+    transition: all 0.4s linear;
+}
+.del:hover{
+    transform: scale(1.2);
+}

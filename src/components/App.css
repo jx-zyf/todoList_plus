@@ -1,0 +1,15 @@
+.todoWrap{
+  padding:1rem 0;
+  width:40vw;
+  margin:auto;
+}
+@media screen and (max-width:860px){
+    .todoWrap{
+        width:70vw;
+    }
+}
+@media screen and (max-width:550px){
+    .todoWrap{
+        width:100vw;
+    }
+}

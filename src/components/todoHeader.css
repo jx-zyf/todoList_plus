@@ -1,0 +1,33 @@
+header{
+    width:100%;
+    margin:auto;
+    text-align: center;
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    color:#fff;
+}
+.title{
+    font-size: 1.2rem;
+    animation: logo 2s linear infinite;
+    color:#fff;
+}
+.date span{
+    font-size: 1rem;
+    font-weight: bolder;
+}
+h2{
+    font-size: 1.2rem;
+    color:#fff !important;
+}
+@keyframes logo {
+    0%{
+        transform: scale(1)
+    }
+    50%{
+        transform: scale(1.2)
+    }
+    100%{
+        transform: scale(1)
+    }
+}
