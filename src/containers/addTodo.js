@@ -4,12 +4,12 @@ import { message, Popconfirm } from 'antd';
 import localStorage from '../utils/localStorage';
 import './addTodo.css';
 
-let nextId = 0;
+let nextId = localStorage.fetch('todos').length > 0 ? localStorage.fetch('todos')[0].id+1 : 0;
 
-class AddTodo extends Component{
-    constructor(props){
+class AddTodo extends Component {
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             inputValue: ''
         }
     }
@@ -18,7 +18,7 @@ class AddTodo extends Component{
         const text = this.state.inputValue;
         const time = this.getTime(new Date());
         const { dispatch } = this.props;
-        if(text !== ''){
+        if (text !== '') {
             dispatch({
                 type: 'ADD_TODO',
                 payload: {
@@ -28,38 +28,38 @@ class AddTodo extends Component{
                 }
             });
             message.success('add success!');
-            this.setState({inputValue: ''});
-        }else{
+            this.setState({ inputValue: '' });
+        } else {
             message.warning('please input content!');
         }
     }
     // 删除全部
     delALl = () => {
         const { dispatch } = this.props;
-        if(this.props.todos.length>0){
+        if (this.props.todos.length > 0) {
             dispatch({
                 type: 'DEL_ALL'
             });
             message.success('delete all success');
             localStorage.remove('todos');
-        }else{
+        } else {
             message.error('nothing can be deleted!');
         }
     }
-    componentDidMount(){ 
+    componentDidMount() {
         // 回车添加
-        let _this=this;
-        document.addEventListener('keyup',function(e){
-            if(e.keyCode===13){
+        let _this = this;
+        document.addEventListener('keyup', function (e) {
+            if (e.keyCode === 13) {
                 _this.addTodo()
             }
         })
     }
-    componentDidUpdate(){
+    componentDidUpdate() {
         const { todos } = this.props;
-        localStorage.save('todos',todos);
+        localStorage.save('todos', todos);
     }
-    render(){
+    render() {
         const { inputValue } = this.state;
         return (
             <div className="todoContentHead">
@@ -76,21 +76,21 @@ class AddTodo extends Component{
             inputValue: e.target.value
         })
     }
-    getTime(newDate){
-        let setDate=newDate;
-        let year=setDate.getFullYear();
-        let month=(setDate.getMonth()+1)<10?'0'+(setDate.getMonth()+1):(setDate.getMonth()+1);
-        let date=setDate.getDate()<10?'0'+setDate.getDate():setDate.getDate();
-        let hour=setDate.getHours()<10?'0'+setDate.getHours():setDate.getHours();
-        let minute=setDate.getMinutes()<10?'0'+setDate.getMinutes():setDate.getMinutes();
-        let second=setDate.getSeconds()<10?'0'+setDate.getSeconds():setDate.getSeconds();
-        let time=`${year}-${month}-${date} ${hour}:${minute}:${second}`;
+    getTime(newDate) {
+        let setDate = newDate;
+        let year = setDate.getFullYear();
+        let month = (setDate.getMonth() + 1) < 10 ? '0' + (setDate.getMonth() + 1) : (setDate.getMonth() + 1);
+        let date = setDate.getDate() < 10 ? '0' + setDate.getDate() : setDate.getDate();
+        let hour = setDate.getHours() < 10 ? '0' + setDate.getHours() : setDate.getHours();
+        let minute = setDate.getMinutes() < 10 ? '0' + setDate.getMinutes() : setDate.getMinutes();
+        let second = setDate.getSeconds() < 10 ? '0' + setDate.getSeconds() : setDate.getSeconds();
+        let time = `${year}-${month}-${date} ${hour}:${minute}:${second}`;
         return time;
     }
 }
 
 const mapStateToProps = (state) => {
-    return {todos: state.todos};
+    return { todos: state.todos };
 }
 
 export default connect(mapStateToProps)(AddTodo);
