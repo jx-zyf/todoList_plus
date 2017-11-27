@@ -17,7 +17,7 @@ class AddTodo extends Component {
     addTodo = (e) => {
         const text = this.state.inputValue;
         const time = this.getTime(new Date());
-        const { dispatch } = this.props;
+        const { dispatch, showAll } = this.props;
         if (text !== '') {
             dispatch({
                 type: 'ADD_TODO',
@@ -32,11 +32,12 @@ class AddTodo extends Component {
         } else {
             message.warning('please input content!');
         }
+        setTimeout(showAll,0);
     }
     // 删除全部
     delALl = () => {
-        const { dispatch } = this.props;
-        if (this.props.todos.length > 0) {
+        const { dispatch, showAll, todos } = this.props;
+        if (todos.length > 0) {
             dispatch({
                 type: 'DEL_ALL'
             });
@@ -45,6 +46,7 @@ class AddTodo extends Component {
         } else {
             message.error('nothing can be deleted!');
         }
+        setTimeout(showAll,0);
     }
     componentDidMount() {
         // 回车添加
