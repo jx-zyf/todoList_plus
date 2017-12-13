@@ -28,7 +28,7 @@ const todos = (state = defaultState, action) => {
         case 'EDIT_TODO':
             return state.map(item => 
                 (item.id === payload.id)
-                ? {...item, text: payload.text}
+                ? {...item, text: payload.text, time: payload.time}
                 : item
             )
         case 'DEL_ALL':

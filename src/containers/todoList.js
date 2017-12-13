@@ -9,7 +9,8 @@ class TodoList extends Component {
         this.state = {
             isEdit: false,
             editId: '',
-            editValue: ''
+            editValue: '',
+            editTime: ''
         }
     }
     // 删除todo
@@ -41,26 +42,40 @@ class TodoList extends Component {
     }
     // 编辑todo
     editHandle = (e) => {
+        const _this = this;
         this.setState({
             isEdit: !this.state.isEdit,
             editValue: e.target.innerText,
-            editId: e.target.getAttribute('data-id')
+            editId: e.target.getAttribute('data-id'),
+            editTime: _this.getTime(new Date())
         });
     }
     // 编辑完成
     editComplete = () => {
         const { dispatch, showAll } = this.props;
-        let { editId, editValue } = this.state;
+        let { editId, editValue, editTime } = this.state;
         dispatch({
             type: 'EDIT_TODO',
             payload: {
                 id: Number(editId),
-                text: editValue
+                text: editValue,
+                time: editTime
             }
         });
         message.success('edit success!');
         this.setState({ isEdit: !this.state.isEdit });
         setTimeout(showAll, 0);
+    }
+    getTime(newDate) {
+        let setDate = newDate;
+        let year = setDate.getFullYear();
+        let month = (setDate.getMonth() + 1) < 10 ? '0' + (setDate.getMonth() + 1) : (setDate.getMonth() + 1);
+        let date = setDate.getDate() < 10 ? '0' + setDate.getDate() : setDate.getDate();
+        let hour = setDate.getHours() < 10 ? '0' + setDate.getHours() : setDate.getHours();
+        let minute = setDate.getMinutes() < 10 ? '0' + setDate.getMinutes() : setDate.getMinutes();
+        let second = setDate.getSeconds() < 10 ? '0' + setDate.getSeconds() : setDate.getSeconds();
+        let time = `${year}-${month}-${date} ${hour}:${minute}:${second}`;
+        return time;
     }
     render() {
         let isEdit = this.state.isEdit;
